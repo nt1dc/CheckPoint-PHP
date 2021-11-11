@@ -36,8 +36,8 @@ function checkX() {
 
 function checkY() {
     let yCheck = document.getElementById("y").value;
-    if (yCheck >= -5 && yCheck <= 3) {
-        Y = yCheck;
+    if (yCheck >= -5 && yCheck <= 3 && (yCheck !== "")) {
+        Y=parseFloat(yCheck).toFixed(2)
         return true
     } else {
         fixThisShit("Введи нормальный Y")
@@ -53,8 +53,9 @@ function checkR() {
         return false;
     }
 }
-function clearPointer(){
-    pointer.setAttribute("visibility","hidden");
+
+function clearPointer() {
+    pointer.setAttribute("visibility", "hidden");
 }
 
 function setPointer() {
@@ -77,28 +78,37 @@ function processSubmit() {
 
 function makeTable(serverAnswer) {
     let result = "";
-    for (let [indxex, row] of Object.entries(serverAnswer).reverse()) {
-         let color="";
-        // console.log(row)
-        // if  (row["coordsStatus"]==="dead_inside"){
-        //     color="style='background: red'"
-        // }else {
-        //     color="style='background: green'"
-        // }
+    try {
 
-        result += "<tr "+color+"> <td>" + row["x"] + "</td><td>" + row["y"] + "</td><td>" + row["r"] + "</td><td>" + row["currentTime"] + "</td><td>" + row["benchmarkTime"] + "</td><td>" + row["coordsStatus"] + "</td></tr>"
+
+        for (let [indxex, row] of Object.entries(serverAnswer).reverse()) {
+            let color = "";
+            // console.log(row)
+            // if  (row["coordsStatus"]==="dead_inside"){
+            //     color="style='background: red'"
+            // }else {
+            //     color="style='background: green'"
+            // }
+
+            result += "<tr " + color + "> <td>" + row["x"] + "</td><td>" + row["y"] + "</td><td>" + row["r"] + "</td><td>" + row["currentTime"] + "</td><td>" + row["benchmarkTime"] + "</td><td>" + row["coordsStatus"] + "</td></tr>"
+        }
+        answerValues.innerHTML = result;
+    }catch (e){
+
     }
-    answerValues.innerHTML = result;
 }
 
 window.onload = function () {
     let request = '?t=3';
+
+
     fetch("main.php" + request, {
         method: "GET",
         headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
     }).then(function (response) {
-        return response.json()
+        return response.json().catch(error => console.log("empty"));
     }).then(makeTable)
+
 }
 
 
