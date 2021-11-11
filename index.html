@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- То что контент может вылетить с разных сторон это не баг а фича!
+    сделано криворуким дебилом который ищет себя
+
+-->
+<head>
+    <meta charset="UTF-8">
+    <title> LABA</title>
+    <link rel="icon" type="image/png" href="img/флай.jpg"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+<header>
+    <div id="header_left">
+        <h2>Антонов Дмитрий Владимирович<br>
+            группа Р3215</h2>
+    </div>
+    <div id="header_right">
+        <h2 id="right_h2">Вариант 15001</h2>
+    </div>
+</header>
+<div class="content">
+    <div class="graph center">
+
+        <svg style="height: 300px;
+width: 300px;
+background-color: white;">
+            <!— fill elements are here to make everything look nice-->
+            <polygon fill="#0076ff" fill-opacity="1" points="150,150 210,150 150,90"></polygon>
+            <rect fill="#0076ff" fill-opacity="1" x="150" y="150" height="60" width="120"></rect>
+            <g transform="translate(150,150)">
+                <path d="M0 0 -60 0 A60 -55 0 0 0 0 60" fill="#0076ff"/>
+            </g>
+            <line stroke="black" x1="0" x2="300" y1="150" y2="150"></line>
+            <line stroke="black" x1="150" x2="150" y1="0" y2="300"></line>
+
+            <text x="275" y="143">R</text>
+            <line x1="270" x2="270" y1="148" y2="152"></line>
+
+            <text x="215" y="143">R/2</text>
+            <line x1="210" x2="210" y1="148" y2="152"></line>
+
+            <text x="90" y="143">-R/2</text>
+            <line x1="90" x2="90" y1="148" y2="152"></line>
+
+            <text x="30" y="143">-R</text>
+            <line x1="30" x2="30" y1="148" y2="152"></line>
+
+            <text x="150" y="26">R</text>
+            <line x1="148" x2="152" y1="30" y2="30"></line>
+
+            <text x="150" y="86">R/2</text>
+            <line x1="148" x2="152" y1="90" y2="90"></line>
+
+            <text x="150" y="210">-R/2</text>
+            <line x1="148" x2="152" y1="210" y2="210"></line>
+
+            <text x="150" y="280">-R</text>
+            <line x1="148" x2="152" y1="270" y2="270"></line>
+
+            <circle r="2" stroke="black" cx="150" cy="150"/>
+
+            <polygon fill="black" points="300,150 295,145 295,155" stroke="black"></polygon>
+            <polygon fill="black" points="150,0 145,5 155,5" stroke="black"></polygon>
+
+            <circle cx="150" cy="150" id="pointer" r="5"></circle>
+        </svg>
+    </div>
+    <div class="changes">
+        <div class="by_x">
+            изменения по x <br>
+            <input id="-5" type="checkbox" name="box">
+            <label class="r_box_label" for="-5">-5</label>
+            <input id="-4" type="checkbox" name="box">
+            <label class="r_box_label" for="-4">-4</label>
+            <input id="-3" type="checkbox" name="box">
+            <label class="r_box_label" for="-3">-3</label>
+            <input id="-2" type="checkbox" name="box">
+            <label class="r_box_label " for="-2">-2</label>
+            <input id="-1" type="checkbox" name="box">
+            <label class="r_box_label" for="-1">-1</label>
+            <input id="0" type="checkbox" name="box">
+            <label class="r_box_label" for="0">0</label>
+            <input id="1" type="checkbox" name="box">
+            <label class="r_box_label" for="1">1</label>
+            <input id="2" type="checkbox" name="box">
+            <label class="r_box_label" for="2">2</label>
+            <input id="3" type="checkbox" name="box">
+            <label class="r_box_label" for="3">3</label>
+
+        </div>
+        <br>
+        <div class="by_y">
+            изменения по y <br>
+            <input id="y" type="text">
+            <label for="y"><br>-5 ... 3</label>
+        </div>
+        <br>
+        <div class="by_R">
+            изменения по R <br>
+            <button class="rButton" value="1" type="button" name="1">1</button>
+            <button class="rButton" value="2" type="button" name="2">2</button>
+            <button class="rButton" value="3" type="button" name="3">3</button>
+            <button class="rButton" value="4" type="button" name="4">4</button>
+            <button class="rButton" value="5" type="button" name="5">5</button>
+
+        </div>
+    </div>
+    <br>
+    <div class="center manager-buttons">
+        <button class="send-button" id="clearButton" type="button">Очистить</button>
+        <button class="send-button" id="submitButton" type="button">Отправить</button>
+    </div>
+    <BR>
+    <table border="50" id="result_table">
+        <tr>
+            <th scope="col" class="coords_column">X</th>
+            <th scope="col" class="coords_column">Y</th>
+            <th scope="col" class="coords_column">R</th>
+            <th scope="col" class="time_column">Текущее время</th>
+            <th scope="col" class="time_column">Время выполнения</th>
+            <th scope="col" class="result_column">Результат</th>
+        </tr>
+        <tbody id="answerValues">
+        </tbody>
+    </table>
+
+
+</div>
+
+
+<footer>
+    footer
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
