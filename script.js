@@ -36,7 +36,7 @@ function checkX() {
 
 function checkY() {
     let yCheck = document.getElementById("y").value;
-    if (yCheck >= -5 && yCheck <= 3) {
+    if (yCheck >= -5 && yCheck <= 3 && yCheck!="") {
         Y = yCheck;
         return true
     } else {

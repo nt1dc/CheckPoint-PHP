@@ -1,7 +1,5 @@
 <?php
 error_reporting(0);
-$counter = 0;
-
 
 function isDataValid($x, $y, $r)
 {
@@ -32,6 +30,49 @@ function atArea($x, $y, $r)
     if (atQuarterCircle($x, $y, $r) || atTriangle($x, $y, $r) || atRectangle($x, $y, $r)) return "dead_inside";
     else return "dead_outside";
 }
+function json_encode_for_helios($a = false)
+{
+    if (is_null($a)) {
+        return 'null';
+    }
+    if ($a === false) {
+        return 'false';
+    }
+    if ($a === true) {
+        return 'true';
+    }
+    if (is_scalar($a)) {
+        if (is_float($a)) {
+            return (float)str_replace(',', '.', (string)$a);
+        }
+        if (is_string($a)) {
+            static $jsonReplaces = array(array('\\', '/', "\n", "\t", "\r", "\b", "\f", '"'), array('\\\\', '\\/', '\\n', '\\t', '\\r', '\\b', '\\f', '\"'));
+            return '"' . str_replace($jsonReplaces[0], $jsonReplaces[1], $a) . '"';
+        }
+
+        return $a;
+    }
+    for ($i = 0, reset($a); true; $i++) {
+        if (key($a) !== $i) {
+            $isList = false;
+            break;
+        }
+    }
+
+    $result = array();
+    if ($isList) {
+        foreach ($a as $v) {
+            $result[] = json_encode_for_helios($v);
+        }
+        return '[' . implode(',', $result) . ']';
+    }
+
+    foreach ($a as $k => $v) {
+        $result[] = json_encode_for_helios((string)$k) . ':' . json_encode_for_helios($v);
+    }
+    return '{' . implode(',', $result) . '}';
+}
+
 
 
 session_start();
@@ -42,7 +83,7 @@ if (!isset($_SESSION["tableRows"])) {
 }
 if ($_GET["t"] == 3) {
     if (count($_SESSION["tableRows"]) != 0) {
-        echo json_encode($_SESSION["tableRows"]);
+        echo json_encode_for_helios($_SESSION["tableRows"]);
     }
 } else {
 
@@ -66,7 +107,6 @@ if ($_GET["t"] == 3) {
         'currentTime' => $currentTime,
         'benchmarkTime' => $benchmarkTime
     );
-    echo json_encode($_SESSION["tableRows"]);
-
+    echo json_encode_for_helios($_SESSION["tableRows"]);
 
 }
