@@ -36,7 +36,7 @@ function atArea($x, $y, $r)
 
 session_start();
 date_default_timezone_set('Europe/Moscow');
-function json_encode_for_helios($a = false)
+function g($a = false)
 {
     if (is_null($a)) {
         return 'null';
@@ -88,9 +88,10 @@ if ($_GET["t"] == 3) {
     }
 } else {
 
-    $x = $_GET["x"] ?? 0;
+    $x = isset($_GET["x"]) ? $_GET["x"] : 0;
     $y = isset($_GET["y"]) ? str_replace(",", ".", $_GET["y"]) : 0;
-    $r = $_GET["r"] ?? 1;
+    $r = isset($_GET["r"]) ? $_GET["r"] : 3;
+
 
     if (!isDataValid($x, $y, $r)) {
         http_response_code(400);
@@ -108,7 +109,7 @@ if ($_GET["t"] == 3) {
         'currentTime' => $currentTime,
         'benchmarkTime' => $benchmarkTime
     );
-    echo json_encode_for_helios($_SESSION["tableRows"]);
+    echo g($_SESSION["tableRows"]);
 
 
 }
