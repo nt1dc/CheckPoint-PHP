@@ -37,7 +37,8 @@ function checkX() {
 function checkY() {
     let yCheck = document.getElementById("y").value;
     if (yCheck >= -5 && yCheck <= 3 && (yCheck !== "")) {
-        Y=parseFloat(yCheck).toFixed(2)
+        Y=parseFloat(yCheck).toFixed(3)
+        console.log(Y)
         return true
     } else {
         fixThisShit("Введи нормальный Y")
@@ -79,8 +80,6 @@ function processSubmit() {
 function makeTable(serverAnswer) {
     let result = "";
     try {
-
-
         for (let [indxex, row] of Object.entries(serverAnswer).reverse()) {
             let color = "";
             // console.log(row)
@@ -100,8 +99,6 @@ function makeTable(serverAnswer) {
 
 window.onload = function () {
     let request = '?t=3';
-
-
     fetch("main.php" + request, {
         method: "GET",
         headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
@@ -166,7 +163,6 @@ function clearY() {
 document.getElementById("clearButton").onclick = function () {
     let xhr = new XMLHttpRequest();
     xhr.open('POST', 'clear.php');
-
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             answerValues.innerHTML = "";

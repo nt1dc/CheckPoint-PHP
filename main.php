@@ -23,7 +23,7 @@ function atTriangle($x, $y, $r)
 
 function atRectangle($x, $y, $r)
 {
-    return (($x >= 0) && ($y >= 0) && ($y <= $r / 2) && ($x <= $r));
+    return (($x >= 0) && ($y <= 0) && (abs($y) <= $r / 2) && ($x <= $r));
 }
 
 
@@ -88,9 +88,9 @@ if ($_GET["t"] == 3) {
     }
 } else {
 
-    $x = isset($_GET["x"]) ? $_GET["x"] : 0;
+    $x = $_GET["x"] ?? 0;
     $y = isset($_GET["y"]) ? str_replace(",", ".", $_GET["y"]) : 0;
-    $r = isset($_GET["r"]) ? $_GET["r"] : 1;
+    $r = $_GET["r"] ?? 1;
 
     if (!isDataValid($x, $y, $r)) {
         http_response_code(400);
