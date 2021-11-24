@@ -26,12 +26,12 @@
 <div class="content">
     <div class="graph center">
 
-        <svg style="    height: 300px;
+        <svg id="svgField" style="    height: 300px;
 width: 300px;
 background-color: white;">
             <!— fill elements are here to make everything look nice-->
             <polygon fill="#0076ff" fill-opacity="1" points="150,150 210,150 150,90"></polygon>
-            <rect fill="#0076ff" fill-opacity="1" x="150" y="150" height="60" width="120"></rect>
+            <rect fill="#0076ff" fill-opacity="1" x="150" y="150" height="60" width="123"></rect>
             <g transform="translate(150,150)">
                 <path d="M0 0 -60 0 A60 -55 0 0 0 0 60" fill="#0076ff"/>
             </g>
@@ -39,13 +39,13 @@ background-color: white;">
             <line stroke="black" x1="150" x2="150" y1="0" y2="300"></line>
 
             <text x="275" y="143">R</text>
-            <line x1="270" x2="270" y1="148" y2="152"></line>
+            <line stroke="black" x1="273" x2="273" y1="148" y2="152"></line>
 
             <text x="215" y="143">R/2</text>
-            <line x1="210" x2="210" y1="148" y2="152"></line>
+            <line stroke="black" x1="210" x2="210" y1="148" y2="152"></line>
 
             <text x="90" y="143">-R/2</text>
-            <line x1="90" x2="90" y1="148" y2="152"></line>
+            <line stroke="black" x1="90" x2="90" y1="148" y2="152"></line>
 
             <text x="30" y="143">-R</text>
             <line x1="30" x2="30" y1="148" y2="152"></line>
@@ -53,11 +53,11 @@ background-color: white;">
             <text x="150" y="26">R</text>
             <line x1="148" x2="152" y1="30" y2="30"></line>
 
-            <text x="150" y="86">R/2</text>
-            <line x1="148" x2="152" y1="90" y2="90"></line>
+            <text x="150" y="86">R/21</text>
+            <line stroke="black" x1="148" x2="152" y1="90" y2="90"></line>
 
-            <text x="150" y="210">-R/2</text>
-            <line x1="148" x2="152" y1="210" y2="210"></line>
+            <text x="155" y="215">-R/2</text>
+            <line stroke="black" x1="147" x2="153" y1="210" y2="210"></line>
 
             <text x="150" y="280">-R</text>
             <line x1="148" x2="152" y1="270" y2="270"></line>
@@ -96,7 +96,7 @@ background-color: white;">
         <br>
         <div class="by_y">
             изменения по y <br>
-            <input id="y" type="text" maxlength="7">
+            <input id="y" type="text" maxlength="7" onchange="this.value = this.value.replace(/,/g, '.')">
             <label for="y"><br>-5 ... 3</label>
         </div>
         <br>
@@ -129,13 +129,12 @@ background-color: white;">
         </tbody>
     </table>
 
-    <footer>
+    <footer id="footer">
         footer
     </footer>
 </div>
 
 
-
-<script src="script.js"></script>
+<script type="text/javascript" src="script.js"></script>
 </body>
 </html>

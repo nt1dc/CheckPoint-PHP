@@ -89,3 +89,6 @@ table {
 img {
     transform: rotate(90deg);
 }
+line{
+    stroke: black;
+}

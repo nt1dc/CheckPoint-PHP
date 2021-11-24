@@ -6,7 +6,7 @@ $counter = 0;
 function isDataValid($x, $y, $r)
 {
     return
-        in_array($x, array(-5, -4, -3, -2, -1, 0, 1, 2, 3)) &&
+        is_numeric($x)&& $x>=-5 && $x<=3 &&
         is_numeric($y) && $y >= -5 && $y <= 3 &&
         in_array($r, array(1, 2, 3, 4, 5));
 }
@@ -18,7 +18,7 @@ function atQuarterCircle($x, $y, $r)
 
 function atTriangle($x, $y, $r)
 {
-    return (($x >= 0) && ($y >= 0) && (-$x + $r >= $y));
+    return (($x >= 0) && ($y >= 0) && ($y<=-$x+$r/2));
 }
 
 function atRectangle($x, $y, $r)
@@ -36,7 +36,7 @@ function atArea($x, $y, $r)
 
 session_start();
 date_default_timezone_set('Europe/Moscow');
-function g($a = false)
+function json_encode_for_helios($a = false)
 {
     if (is_null($a)) {
         return 'null';
@@ -109,7 +109,7 @@ if ($_GET["t"] == 3) {
         'currentTime' => $currentTime,
         'benchmarkTime' => $benchmarkTime
     );
-    echo g($_SESSION["tableRows"]);
+    echo json_encode_for_helios($_SESSION["tableRows"]);
 
 
 }

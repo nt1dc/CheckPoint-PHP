@@ -8,6 +8,7 @@ let answerValues = document.getElementById("answerValues"),
     arrayCheckBox = document.querySelectorAll('input[type=checkbox]')
 let buttonItems = [].slice.call(arrayButton);
 let checkBoxItems = [].slice.call(arrayCheckBox);
+var audio = new Audio('NNN.mp3');
 
 
 function fixThisShit(errMsg) {
@@ -37,8 +38,7 @@ function checkX() {
 function checkY() {
     let yCheck = document.getElementById("y").value;
     if (yCheck >= -5 && yCheck <= 3 && (yCheck !== "")) {
-        Y=parseFloat(yCheck).toFixed(3)
-        console.log(Y)
+        Y = parseFloat(yCheck).toFixed(3).replace(",", ".")
         return true
     } else {
         fixThisShit("Введи нормальный Y")
@@ -73,9 +73,18 @@ function processSubmit() {
         method: "GET",
         headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
     }).then(function (response) {
-        return response.json()
+        if (response.status == 400) {
+            audio.play();
+            alert("Bad request")
+            if (confirm("Прекратить весель?")) {
+                audio.pause();
+            }
+        } else {
+            return response.json()
+        }
     }).then(makeTable)
 }
+
 
 function makeTable(serverAnswer) {
     let result = "";
@@ -92,7 +101,7 @@ function makeTable(serverAnswer) {
             result += "<tr " + color + "> <td>" + row["x"] + "</td><td>" + row["y"] + "</td><td>" + row["r"] + "</td><td>" + row["currentTime"] + "</td><td>" + row["benchmarkTime"] + "</td><td>" + row["coordsStatus"] + "</td></tr>"
         }
         answerValues.innerHTML = result;
-    }catch (e){
+    } catch (e) {
 
     }
 }
@@ -182,4 +191,23 @@ function clearR() {
         btn.style.backgroundColor = "";
         btn.style.color = "#0076ff";
     })
+}
+
+
+document.getElementById("svgField").onmousedown = function submit(event) {
+    const svgSize = 300;
+    let rowX = event.offsetX;
+    let rowY = event.offsetY
+    X = (((R / 50) * (svgSize / 2 - rowX) * -1) / 2).toFixed(1);
+    Y = (((R / 50) * (svgSize / 2 - rowY)) / 2).toFixed(1);
+    if (checkR()) {
+        processSubmit();
+    }
+}
+document.getElementById("footer").ondblclick = function play_stop(event) {
+    if (audio.paused) {
+        audio.play();
+    }else {
+        audio.pause();
+    }
 }
